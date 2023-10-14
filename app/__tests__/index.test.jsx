@@ -4,7 +4,7 @@ import RootLayout from "../layout";
 
 // Mocking the spaceMono font
 jest.mock("next/font/google", () => ({
-  Space_Mono: jest.fn(() => ({
+  Nunito_Sans: jest.fn(() => ({
     className: "mocked-class",
   })),
 }));
