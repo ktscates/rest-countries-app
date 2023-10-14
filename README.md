@@ -1,4 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/9df06790-f675-40bc-94e9-110b6033af9e/deploy-status)](https://app.netlify.com/sites/stirring-faloodeh-8c68ea/deploys)  ![Github actions](https://github.com/ktscates/github-user-search/actions/workflows/node.js.yml/badge.svg)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/396d46bb-2e57-463a-a4a5-dfb3a2ca54c7/deploy-status)](https://app.netlify.com/sites/heartfelt-blancmange-1be231/deploys) ![Github actions](https://github.com/ktscates/rest-countries-app/actions/workflows/node.js.yml/badge.svg)
 
 # Frontend Mentor - REST Countries API with color theme switcher solution
 
@@ -23,8 +23,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [On github](https://github.com/ktscates/github-user-search)
-- Live Site URL: [Live](https://stirring-faloodeh-8c68ea.netlify.app/)
+- Solution URL: [On github](https://github.com/ktscates/rest-countries-app)
+- Live Site URL: [Live](https://heartfelt-blancmange-1be231.netlify.app/)
 
 ### Built with
 
