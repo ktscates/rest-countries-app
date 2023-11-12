@@ -3,13 +3,17 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import searchDark from "../../public/assets/searchD.svg";
 import searchLight from "../../public/assets/searchL.svg";
+import arrowL from "../../public/assets/arrowL.svg";
+import arrowD from "../../public/assets/arrowD.svg";
 import CountryCard from "./CountryCard";
+// import CountryDetails from "./CountryDetails";
 import axios from "axios";
 
 const SearchAndFilter = ({ theme, countries }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedContinent, setSelectedContinent] = useState("");
+  const [showOptions, setShowOptions] = useState(false);
 
   useEffect(() => {
     const fetchSearchResults = async () => {
@@ -41,9 +45,19 @@ const SearchAndFilter = ({ theme, countries }) => {
     }
   }, [searchTerm, selectedContinent, countries]);
 
-  const handleContinentChange = (e) => {
-    setSelectedContinent(e.target.value);
+  const handleContinentChange = (continent) => {
+    setSelectedContinent(continent);
+    setSearchTerm(""); // Clear the search term when a continent is selected
+    setShowOptions(false); // Hide the options after selecting a continent
   };
+
+  const continents = [
+    { value: "Africa", label: "Africa" },
+    { value: "Americas", label: "Americas" },
+    { value: "Asia", label: "Asia" },
+    { value: "Europe", label: "Europe" },
+    { value: "Oceania", label: "Oceania" },
+  ];
 
   return (
     <>
@@ -58,7 +72,7 @@ const SearchAndFilter = ({ theme, countries }) => {
             />
           </div>
           <input
-            className="placeholder:text-searchText dark:placeholder:text-backL dark:bg-backD md:text-sm text-xs font-normal"
+            className="placeholder:text-searchText dark:placeholder:text-backL dark:bg-backD md:text-sm text-xs font-normal text-searchText dark:text-blackL border-none focus:border-none focus:outline-none"
             type="text"
             placeholder="Search for a country…"
             value={searchTerm}
@@ -66,23 +80,41 @@ const SearchAndFilter = ({ theme, countries }) => {
           />
         </div>
 
-        <div className="flex rounded-md w-[200px] md:h-[56px] h-[48px] md:text-sm text-xs bg-transparent shadow-[0_2px_9px_0_rgba(0,0,0,0.05)] outline-none">
-          <select
-            className="w-full h-full px-6 appearance-none bg-backL dark:bg-backD te text-texts dark:text-backL rounded-md outline-none"
-            value={selectedContinent}
-            onChange={handleContinentChange}
+        <div className="relative">
+          <button
+            className="flex items-center justify-between rounded-md w-[200px] md:h-[56px] h-[48px] md:text-sm text-xs bg-backL text-texts dark:text-backL dark:bg-backD shadow-[0_2px_9px_0_rgba(0,0,0,0.05)] outline-none"
+            onClick={() => setShowOptions(!showOptions)}
           >
-            <option value="">Filter by Region</option>
-            <option value="Africa">Africa</option>
-            <option value="Americas">Americas</option>
-            <option value="Asia">Asia</option>
-            <option value="Europe">Europe</option>
-            <option value="Oceania">Oceania</option>
-          </select>
+            <span className="px-6">
+              {selectedContinent ? selectedContinent : "Filter by Region"}
+            </span>
+            <Image
+              className="fill-current mr-6"
+              src={theme === "dark" ? arrowL : arrowD}
+              alt="expand"
+              width={10}
+              height={10}
+            />
+          </button>
+          {showOptions && (
+            <div className="absolute w-full top-full mt-1 bg-backL dark:bg-backD text-texts dark:text-backL border rounded-md shadow-lg border-none focus:border-none focus:outline-none">
+              {continents.map((continent) => (
+                <button
+                  key={continent.value}
+                  className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
+                  onClick={() => handleContinentChange(continent.value)}
+                >
+                  {continent.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
-      <CountryCard countries={searchResults} />
+      <CountryCard
+        countries={searchResults}
+      />
     </>
   );
 };
