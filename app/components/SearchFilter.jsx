@@ -6,7 +6,6 @@ import searchLight from "../../public/assets/searchL.svg";
 import arrowL from "../../public/assets/arrowL.svg";
 import arrowD from "../../public/assets/arrowD.svg";
 import CountryCard from "./CountryCard";
-// import CountryDetails from "./CountryDetails";
 import axios from "axios";
 
 const SearchAndFilter = ({ theme, countries }) => {
@@ -20,11 +19,10 @@ const SearchAndFilter = ({ theme, countries }) => {
       try {
         let apiUrl;
 
-        // If a continent is selected, fetch countries for that continent
         if (selectedContinent) {
-          apiUrl = `https://restcountries.com/v3.1/region/${selectedContinent}`;
+          // Use 'subregion' instead of 'region' for continents
+          apiUrl = `https://restcountries.com/v3.1/subregion/${selectedContinent}`;
         } else {
-          // If no continent is selected, fetch countries based on the search term
           apiUrl = `https://restcountries.com/v3.1/name/${searchTerm}`;
         }
 
@@ -112,9 +110,7 @@ const SearchAndFilter = ({ theme, countries }) => {
         </div>
       </div>
 
-      <CountryCard
-        countries={searchResults}
-      />
+      <CountryCard countries={searchResults} />
     </>
   );
 };
