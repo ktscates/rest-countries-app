@@ -18,7 +18,7 @@ const CountryCard = ({ countries }) => {
   };
 
   return (
-    <div className="lg:grid lg:grid-cols-4 md:grid md:grid-cols-2 flex flex-col gap-4 place-items-center md:ml-[45px] md:mr-[40px]">
+    <div className="xl:grid xl:grid-cols-4 lg:grid lg:grid-cols-3 md:grid md:grid-cols-2 flex flex-col gap-4 place-items-center md:ml-[45px] md:mr-[40px]">
       {sortedCountries.map((country, index) => (
         <Link
           legacyBehavior
